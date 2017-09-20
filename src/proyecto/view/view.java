@@ -1,21 +1,72 @@
 package proyecto.view;
 
+import proyecto.controller.controller;
+import proyecto.model.model;
+import proyecto.model.data;
+
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
-import proyecto.controller.controller;
-import proyecto.model.model;
+import javax.swing.JOptionPane;
+import proyecto.model.transicion;
 
 public class view extends javax.swing.JFrame implements Observer {
-
-    model model;
-    controller controller;
     
     public view() {
         initComponents();
-        this.setSize(800,600);
+        this.setSize(800, 600);
     }
     
+    public void solicitudNegada(){
+                        JOptionPane.showMessageDialog(this, "Rechazado");
+    }
+    
+    public void solicitudAprobada(){
+            JOptionPane.showMessageDialog(this, "Aceptado");
+    }
+    
+    public String getEstado(){
+        int t = -1;
+        String aux = JOptionPane.showInputDialog(this, "Id: ", "Estado", JOptionPane.INFORMATION_MESSAGE);;
+        
+        while(t != 0){
+            if(!"".equals(aux)){
+                t++;
+            }
+            else{aux = JOptionPane.showInputDialog(this, "Digite otro Id: ", "No aceptado", JOptionPane.INFORMATION_MESSAGE);}
+        }
+        return aux;
+    }
+        
+    public String getHilera(){
+        int t = -1;
+        String aux = JOptionPane.showInputDialog(this, "Hilera: ", "Entrada", JOptionPane.INFORMATION_MESSAGE);;
+        while(t != 0){
+            if(!"".equals(aux)){
+                t++;
+            }
+            else{
+                aux = JOptionPane.showInputDialog(this, "Digite otra hilera: ", "No aceptada", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        return aux;
+        }
+    
+    public String getCodigo(){
+        int t = -1;
+        String aux = JOptionPane.showInputDialog(this, "Simbolos: ", "Entrada", JOptionPane.INFORMATION_MESSAGE);;
+        while(t != 0){
+            if(!"".equals(aux)){
+                t++;
+            }
+            else{
+                aux = JOptionPane.showInputDialog(this, "Digite otro simbolo: ", "No aceptado", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        return aux;
+        }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -25,30 +76,125 @@ public class view extends javax.swing.JFrame implements Observer {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        Menu = new javax.swing.JMenuBar();
+        Archivo = new javax.swing.JMenu();
+        Guardar = new javax.swing.JMenuItem();
+        Recuperar = new javax.swing.JMenuItem();
+        Limpiar = new javax.swing.JMenuItem();
+        Estado = new javax.swing.JMenu();
+        Inicial = new javax.swing.JMenuItem();
+        Intermedio = new javax.swing.JMenuItem();
+        Final = new javax.swing.JMenuItem();
+        Verificar = new javax.swing.JMenu();
+        Hilera = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("MEF");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        Archivo.setText("Archivo");
+
+        Guardar.setText("Guardar");
+        Archivo.add(Guardar);
+
+        Recuperar.setText("Recuperar");
+        Recuperar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RecuperarActionPerformed(evt);
+            }
+        });
+        Archivo.add(Recuperar);
+
+        Limpiar.setText("Limpiar");
+        Limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarActionPerformed(evt);
+            }
+        });
+        Archivo.add(Limpiar);
+
+        Menu.add(Archivo);
+
+        Estado.setText("Estado");
+
+        Inicial.setText("Inicial");
+        Inicial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InicialActionPerformed(evt);
+            }
+        });
+        Estado.add(Inicial);
+
+        Intermedio.setText("Intermedio");
+        Intermedio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IntermedioActionPerformed(evt);
+            }
+        });
+        Estado.add(Intermedio);
+
+        Final.setText("Final");
+        Final.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FinalActionPerformed(evt);
+            }
+        });
+        Estado.add(Final);
+
+        Menu.add(Estado);
+
+        Verificar.setText("Verificar");
+
+        Hilera.setText("Hilera");
+        Hilera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HileraActionPerformed(evt);
+            }
+        });
+        Verificar.add(Hilera);
+
+        Menu.add(Verificar);
+
+        setJMenuBar(Menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(204, Short.MAX_VALUE)
-                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(196, 196, 196))
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(204, Short.MAX_VALUE)
-                .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(96, 96, 96))
+            .addGap(0, 281, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void RecuperarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecuperarActionPerformed
+
+    }//GEN-LAST:event_RecuperarActionPerformed
+
+    private void InicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicialActionPerformed
+            
+    }//GEN-LAST:event_InicialActionPerformed
+
+    private void IntermedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IntermedioActionPerformed
+        
+    }//GEN-LAST:event_IntermedioActionPerformed
+
+    private void FinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalActionPerformed
+        
+    }//GEN-LAST:event_FinalActionPerformed
+
+    private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
+
+    }//GEN-LAST:event_LimpiarActionPerformed
+
+    private void HileraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HileraActionPerformed
+
+    }//GEN-LAST:event_HileraActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -84,34 +230,97 @@ public class view extends javax.swing.JFrame implements Observer {
         });
     }
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.Box.Filler filler1;
-    // End of variables declaration//GEN-END:variables
-
-        @Override
-    public void update(Observable updatedModel,Object param){        
+    @Override
+    public void update(Observable o, Object arg) {
         this.repaint();
     }
-    
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-//        Data d;
-//        g.setColor(Color.blue);
-//        for(int i=0; i<model.getSeries().size();i++){
-//            d = model.getSeries().get(i);
-//            g.fillRect(50+i*70,250-d.getData(),50,d.getData());
-//        }
-}
-    
-    public void setModel(model model){
-        this.model=model;
-        //model.addObserver(this);
-    }    
-
-    public void setController(controller controller){
-        this.controller = controller;
-        //this.agregar.addActionListener(controller);
-        //this.addMouseListener(controller);
+        data d;
+        transicion t;
+        
+        if(!model.isEmptySeries()){
+        for (int i = 0; i < model.getSeries().size(); i++) {
+            d = model.getSeries().get(i);
+            
+            switch (d.getTipo()) {
+                case 'I':
+                    g.setColor(Color.blue);
+                    break;
+                    
+                case 'M':
+                    g.setColor(Color.green);
+                    break;
+                    
+                case 'F':
+                    g.setColor(Color.red);
+                    break;
+                    
+                default:
+                    break;
+            }
+            
+            g.fillOval((int)d.getX(),(int) d.getY(), data.sizeBall, data.sizeBall);
+            
+            g.setColor(Color.black);
+            g.drawString(model.getSeries().get(i).getNombre(), (int)d.getX()+20,(int) d.getY()+30);
+            
+         if(!model.isEmptyTransiciones()){
+             for (int j = 0; j < model.getTransiciones().size(); j++) {
+                    t = model.getTransiciones().get(j);
+                    g.drawLine(t.getInicial().getX(), t.getInicial().getY(), t.getFinal().getX(), t.getFinal().getY());
+                    g.drawString(t.getCodigo(), d.getX()+d.getX()-20, d.getY()+d.getY()-20);
+                }
+            }
+         
         }
+                }
+        else{
+            this.setBackground(Color.gray);
+        }
+    }
+
+    model model;
+    controller controller;
+
+    public void setModel(model model) {
+        this.model = model;
+        model.addObserver(this);
+    }
+
+    public void setController(controller controller) {
+        this.controller = controller;
+
+        //Estado
+        this.Inicial.addActionListener(controller);
+        this.Intermedio.addActionListener(controller);
+        this.Final.addActionListener(controller);
+
+        //Archivo
+        this.Guardar.addActionListener(controller);
+        this.Recuperar.addActionListener(controller);
+        this.Limpiar.addActionListener(controller);
+
+        //Verificar
+        this.Hilera.addActionListener(controller);
+        
+        this.addMouseListener(controller);
+        this.addMouseMotionListener(controller);
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JMenu Archivo;
+    public javax.swing.JMenu Estado;
+    public javax.swing.JMenuItem Final;
+    public javax.swing.JMenuItem Guardar;
+    public javax.swing.JMenuItem Hilera;
+    public javax.swing.JMenuItem Inicial;
+    public javax.swing.JMenuItem Intermedio;
+    public javax.swing.JMenuItem Limpiar;
+    public javax.swing.JMenuBar Menu;
+    public javax.swing.JMenuItem Recuperar;
+    public javax.swing.JMenu Verificar;
+    // End of variables declaration//GEN-END:variables
 }
